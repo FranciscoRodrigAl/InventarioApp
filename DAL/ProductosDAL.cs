@@ -56,5 +56,11 @@ namespace DAL
             return true;
 
         }
+
+        public bool EditarProducto(int id, Producto producto)
+        {
+            string query;
+            return false;
+        }
     }
 }
