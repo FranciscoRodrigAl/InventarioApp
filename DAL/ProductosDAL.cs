@@ -59,7 +59,12 @@ namespace DAL
 
         public bool EditarProducto(int id, Producto producto)
         {
-            string query;
+            string query = $"UPDATE {tableName} SET {nombreColumnName} = '{producto.Nombre}', {cantidadColumnName} = {producto.Cantidad}, {precioColumnName} = {producto.Precio}, {descripcionColumnName} = '{producto.Descripcion}' WHERE id = {id}";
+            DataTable dt = (DataTable)DatabaseHelper.Instance.ExecuteQuery(query);
+            if(dt.Rows.Count > 0)
+            {
+                return true;
+            }
             return false;
         }
     }

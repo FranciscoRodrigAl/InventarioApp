@@ -49,7 +49,7 @@ namespace BLL
 
         public bool EditarProducto(Producto productoEditado)
         {
-
+            return false;
         }
     }
 }
