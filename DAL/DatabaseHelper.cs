@@ -17,7 +17,7 @@ namespace DAL
             get { return instance; }
         }
 
-        private static string CONNECTION_STRING = "Data Source=DESKTOP-CHERF4D\\SQLEXPRESS; Initial Catalog=Tareas;Integrated Security=True";
+        private static string CONNECTION_STRING = "Data Source=DESKTOP-CHERF4D\\SQLEXPRESS; Initial Catalog=Productos;Integrated Security=True";
 
         public int ExecuteNonQuery(string query)
         {

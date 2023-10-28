@@ -49,7 +49,8 @@ namespace BLL
 
         public bool EditarProducto(Producto productoEditado)
         {
-            return false;
+            bool editado = productoDAL.EditarProducto(productoEditado.Id, productoEditado);
+            return editado;
         }
     }
 }

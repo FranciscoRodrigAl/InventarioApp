@@ -9,15 +9,15 @@ namespace DAL
 {
     public class ProductosDAL
     {
-        private const string tableName = "Productos";
-        private const string nombreColumnName = "Productos";
-        private const string precioColumnName = "Productos";
-        private const string cantidadColumnName = "Productos";
-        private const string descripcionColumnName = "Productos";
+        private const string tableName = "Producto";
+        private const string nombreColumnName = "nombre";
+        private const string precioColumnName = "precio";
+        private const string cantidadColumnName = "cantidad";
+        private const string descripcionColumnName = "descripcion";
 
         public bool SaveProducto(Producto producto)
         {
-            string query = $"INSERT INTO {tableName}({nombreColumnName}, {precioColumnName},{cantidadColumnName},{descripcionColumnName})VALUES ('{producto.Nombre},{producto.Precio},{producto.Cantidad},'{producto.Descripcion}'";
+            string query = $"INSERT INTO {tableName}({nombreColumnName}, {precioColumnName},{cantidadColumnName},{descripcionColumnName})VALUES ('{producto.Nombre}',{producto.Precio},{producto.Cantidad},'{producto.Descripcion}')";
             int rows = DatabaseHelper.Instance.ExecuteNonQuery(query);
             if(rows == 0)
             {
@@ -37,7 +37,7 @@ namespace DAL
                 p.Id = int.Parse(dr["id"].ToString());
                 p.Nombre = dr["nombre"].ToString();
                 p.Precio = double.Parse(dr["precio"].ToString());
-                p.Cantidad = double.Parse(dr["cantidad"].ToString());
+                p.Cantidad = int.Parse(dr["cantidad"].ToString());
                 p.Descripcion = dr["descripcion"].ToString();
                 productos.Add(p);
             }
@@ -59,9 +59,10 @@ namespace DAL
 
         public bool EditarProducto(int id, Producto producto)
         {
-            string query = $"UPDATE {tableName} SET {nombreColumnName} = '{producto.Nombre}', {cantidadColumnName} = {producto.Cantidad}, {precioColumnName} = {producto.Precio}, {descripcionColumnName} = '{producto.Descripcion}' WHERE id = {id}";
-            DataTable dt = (DataTable)DatabaseHelper.Instance.ExecuteQuery(query);
-            if(dt.Rows.Count > 0)
+            string query = $"UPDATE {tableName} SET {nombreColumnName} = '{producto.Nombre}', {descripcionColumnName} = '{producto.Descripcion}', {precioColumnName} = {producto.Precio} , {cantidadColumnName} = {producto.Cantidad} WHERE id={id};";
+            //DataTable dt = (DataTable)DatabaseHelper.Instance.ExecuteQuery(query);
+            int rows = DatabaseHelper.Instance.ExecuteNonQuery(query);
+            if(rows > 0)
             {
                 return true;
             }
